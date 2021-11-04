@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test - ${{ matrix.environment.name }} - ${{ matrix.testSettings.name }}
+    runs-on: ${{ matrix.environment.labels }}
+    concurrency: environment-${{ matrix.environment.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        environment:
+          - name: server1
+            labels: [ubuntu-latest]
+          - name: server2
+            labels: [ubuntu-latest]
+        testSettings:
+          - name: Unit Tests
+          - name: Integration Tests
+    steps:
+      - run: |
+          echo "Testing ${{ matrix.testSettings.name}} on ${{ matrix.environment.name }}"
+          sleep 10
