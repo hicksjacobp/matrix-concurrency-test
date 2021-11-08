@@ -19,7 +19,9 @@ jobs:
         testSettings:
           - name: Unit Tests
           - name: Integration Tests
+          - name: User Tests
     steps:
       - run: |
           echo "Testing ${{ matrix.testSettings.name}} on ${{ matrix.environment.name }}"
           sleep 10
+          echo "Done with ${{ matrix.testSettings.name}} on ${{ matrix.environment.name }}"
