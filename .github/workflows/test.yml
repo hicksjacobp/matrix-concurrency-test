@@ -5,23 +5,21 @@ on:
 
 jobs:
   test:
-    name: Test - ${{ matrix.environment.name }} - ${{ matrix.testSettings.name }}
-    runs-on: ${{ matrix.environment.labels }}
-    concurrency: environment-${{ matrix.environment.name }}
+    name: Test - ${{ matrix.environment }} - ${{ matrix.testSettings }}
+    runs-on: ubuntu-latest
+    concurrency: environment-${{ matrix.environment }}
     strategy:
       fail-fast: false
       matrix:
         environment:
-          - name: server1
-            labels: [ubuntu-latest]
-          - name: server2
-            labels: [ubuntu-latest]
+          - server1
+          - server2
         testSettings:
-          - name: Unit Tests
-          - name: Integration Tests
-          - name: User Tests
+          - Unit Tests
+          - Integration Tests
+          - User Tests
     steps:
       - run: |
-          echo "Testing ${{ matrix.testSettings.name}} on ${{ matrix.environment.name }}"
+          echo "Testing ${{ matrix.testSettings }} on ${{ matrix.environment }}"
           sleep 10
-          echo "Done with ${{ matrix.testSettings.name}} on ${{ matrix.environment.name }}"
+          echo "Done with ${{ matrix.testSettings }} on ${{ matrix.environment }}"
